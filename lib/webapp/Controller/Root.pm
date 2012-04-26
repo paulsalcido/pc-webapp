@@ -28,9 +28,6 @@ The root page (/)
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
-
-    # Hello World
-    $c->response->body( $c->welcome_message );
 }
 
 =head2 default
@@ -51,7 +48,11 @@ Attempt to render a view, if needed.
 
 =cut
 
-sub end : ActionClass('RenderView') {}
+sub end :Private {
+    my ( $self , $c ) = @_;
+
+    $c->forward( $c->view('main') );
+}
 
 =head1 AUTHOR
 
