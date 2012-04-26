@@ -1,0 +1,6 @@
+<h1>[% Deployment %]</h1>
+<xmp>
+[% FOREACH dep IN deployment_statements %]
+    [% dep %]
+[% END %]
+</xmp>
