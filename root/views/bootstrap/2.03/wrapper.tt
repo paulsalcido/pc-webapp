@@ -43,10 +43,23 @@
             <ul class="nav">
               <li class="active"><a href="/">Home</a></li>
               [% IF c.session.member.id %]
-                <li><a href="/me">[% c.session.member.display_name %]</a></li>
-                [% IF c.session.member.roles.admin %]
-                    <li><a href="/admin">Admin</a></li>
-                [% END %]
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">[% c.session.member.display_name %]<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/profile">Profile</a>
+                        <li><a href="/logout">Logout</a>
+                        [% IF c.session.member.roles.admin %]
+                        <li><a href="/admin">Admin</a>
+                        [% END %]
+                    </ul>
+                </li>
+              [% ELSE %]
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Login<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/login/google"><img src="/static/images/google4.png"></img>Google</a>
+                    </ul>
+                </li>
               [% END %]
               <li><a href="/about">About</a></li>
               <li><a href="/contact">Contact</a></li>

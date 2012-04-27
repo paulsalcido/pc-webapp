@@ -30,6 +30,20 @@ sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 }
 
+sub logout :Local {
+    my ( $self, $c ) = @_;
+    
+    if ( $c->session->{member} ) {
+        delete $c->session->{member};
+    }
+}
+
+sub contact :Local {
+}
+
+sub about :Local {
+}
+
 =head2 default
 
 Standard 404 error page
