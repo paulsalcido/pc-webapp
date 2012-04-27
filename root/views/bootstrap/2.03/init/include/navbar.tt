@@ -1,0 +1,10 @@
+<div class="span3">
+    <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+            <li class="nav-header">Initialize</li>
+            <li[% IF active_tab == "deploy" %] class="active"[% END %]><a href="/init/deploy">Deploy Database</li>
+            <li[% IF active_tab == "logins" %] class="active"[% END %]><a href="/init/loginsetup">Setup Login Model</li></li>
+            <li[% IF active_tab == "admin" %] class="active"[% END %]><a href="/init/admin">Create Admin User</a></li>
+        </ul>
+    </div>
+</div>

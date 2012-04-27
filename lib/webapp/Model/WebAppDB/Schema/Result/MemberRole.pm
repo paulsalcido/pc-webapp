@@ -1,4 +1,4 @@
-package webapp::Model::WebAppDB::Schema::Result::Member;
+package webapp::Model::WebAppDB::Schema::Result::MemberRole;
 
 use strict;
 use warnings;
@@ -9,7 +9,7 @@ use namespace::autoclean;
 extends 'DBIx::Class::Core';
 
 __PACKAGE__->load_components("InflateColumn::DateTime");
-__PACKAGE__->table("member");
+__PACKAGE__->table("member_role");
 __PACKAGE__->add_columns(
   "id",
   { 
@@ -17,7 +17,13 @@ __PACKAGE__->add_columns(
     default_value => undef, 
     is_nullable => 0, 
   },
-  "display_name",
+  "role",
+  {
+    data_type => "character varying",
+    default_value => undef,
+    is_nullable => 0,
+  },
+  "member",
   {
     data_type => "character varying",
     default_value => undef,
@@ -39,17 +45,23 @@ __PACKAGE__->add_columns(
   },
 );
 __PACKAGE__->set_primary_key('id');
+__PACKAGE__->add_unique_constraint(['member','role']);
 
-__PACKAGE__->has_many(
-    'memberroles',
-    'webapp::Model::WebAppDB::Schema::Result::MemberRole',
-    { 'foreign.member' => 'self.id' }
+__PACKAGE__->belongs_to(
+    'member',
+    'webapp::Model::WebAppDB::Schema::Result::Member',
+    { id => 'member' }
 );
-__PACKAGE__->has_many(
-    'openids',
-    'webapp::Model::WebAppDB::Schema::Result::OpenID',
-    { 'foreign.member' => 'self.id' }
+__PACKAGE__->belongs_to(
+    'role',
+    'webapp::Model::WebAppDB::Schema::Result::Role',
+    { id => 'role' }
 );
 
-# You can replace this text with custom content, and it will be preserved on regeneration
+sub sqlt_deploy_hook {
+    my ($self,$sqlt) = @_;
+    $sqlt->add_index(fields => ['role']);
+    $sqlt->add_index(fields => ['member']);
+}
+
 1;

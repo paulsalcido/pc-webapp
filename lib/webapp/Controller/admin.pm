@@ -25,11 +25,6 @@ sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 }
 
-sub deploy :Local {
-    my ( $self, $c ) = @_;
-    $c->model('WebAppDB')->schema->deploy;
-}
-
 sub loginsetup :Local {
     my ( $self, $c ) = @_;
     my $google_oid = $c->model('WebAppDB::OpenIDEndpoint')->find({name => 'google'});

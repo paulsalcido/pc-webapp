@@ -1,4 +1,4 @@
-package webapp::Model::WebAppDB::Schema::Result::Member;
+package webapp::Model::WebAppDB::Schema::Result::Role;
 
 use strict;
 use warnings;
@@ -9,7 +9,7 @@ use namespace::autoclean;
 extends 'DBIx::Class::Core';
 
 __PACKAGE__->load_components("InflateColumn::DateTime");
-__PACKAGE__->table("member");
+__PACKAGE__->table("role");
 __PACKAGE__->add_columns(
   "id",
   { 
@@ -17,7 +17,7 @@ __PACKAGE__->add_columns(
     default_value => undef, 
     is_nullable => 0, 
   },
-  "display_name",
+  "name",
   {
     data_type => "character varying",
     default_value => undef,
@@ -39,17 +39,12 @@ __PACKAGE__->add_columns(
   },
 );
 __PACKAGE__->set_primary_key('id');
+__PACKAGE__->add_unique_constraint(['name']);
 
 __PACKAGE__->has_many(
     'memberroles',
     'webapp::Model::WebAppDB::Schema::Result::MemberRole',
-    { 'foreign.member' => 'self.id' }
-);
-__PACKAGE__->has_many(
-    'openids',
-    'webapp::Model::WebAppDB::Schema::Result::OpenID',
-    { 'foreign.member' => 'self.id' }
+    { 'foreign.role' => 'self.id' }
 );
 
-# You can replace this text with custom content, and it will be preserved on regeneration
 1;

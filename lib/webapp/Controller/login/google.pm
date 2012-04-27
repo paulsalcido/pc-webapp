@@ -137,7 +137,15 @@ sub check :Local :Args(0) {
             $c->log->info("error $err");
         },
     );
-    $c->response->redirect('/');
+    my $final_redirect = '/';
+    if ( $c->session->{member} ) {
+        if ( $c->session->{post_login_redirect} ) {
+            $final_redirect = $c->session->{post_login_redirect};
+            delete $c->session->{post_login_redirect};
+        }
+        $c->refresh_member_session;
+    }
+    $c->response->redirect($final_redirect);
     $c->detach;
 }
 

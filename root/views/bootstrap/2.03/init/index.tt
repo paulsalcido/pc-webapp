@@ -1,0 +1,12 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        [% PROCESS init/include/navbar.tt %] 
+        <div class="span9">
+            <div class="hero-unit">
+                <h1>[% c.config.name %] Initialization</h1>
+                <p>The application [% c.config.name %] requires initialization, and this set of pages will guide you through the steps necessary to get the application up and running with successful logins via an Open login model.  It will also get a preconfigured database filled with tables that are needed for the application to work.</p>
+                <a href="/init/deploy" class="btn btn-primary">Deploy Database</a>
+            </div>
+        </div>
+    </div>
+</div>

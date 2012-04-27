@@ -83,4 +83,14 @@ sub uuid {
     return $uuid;
 }
 
+sub refresh_member_session {
+    my ($self) = @_;
+    my $id = $self->session->{member}->{id};
+    my $member = $self->model('WebAppDB::Member')->find({ id => $id });
+    delete $self->session->{member}->{roles} if ( $self->session->{member}->{roles} );
+    foreach my $mr ( $member->memberroles ) {
+        $self->session->{member}->{roles}->{$mr->role->name} = 1;
+    }
+}
+
 1;

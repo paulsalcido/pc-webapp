@@ -1,0 +1,21 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        [% PROCESS init/include/navbar.tt active_tab="logins" %] 
+        <div class="span9">
+            <div class="hero-unit">
+                <h1>Login Setup</h1>
+                [% UNLESS google_oid %]
+                    <p>By default, [% c.config.name %] does not have an internal login model.  Instead, it uses Open authentication systems to complete logins.  With an application password, it is possible to secure your application logins.  Here, we will set the Google OpenID model.  After doing so, you will log in with your Google account to create the initial administrator for [% c.config.name %].  You are not going to want to change this, or else it will force your users to relogin and give you their information again, causing minimal discomfort, but possibly affecting your application user base.</p>
+                    <form method="post" class="well">
+                        <label for="google-openid-secret">Google OpenID Secret</label>
+                        <input name="google-openid-secret" type="text" class="span3" [% UNLESS google_oid %]placeholder="Enter secret..."[% ELSE %]value=[% Google_oid.openid_secret %][% END %]></input>
+                        <input type="submit" class="btn btn-primary" value="Set Google OpenID Secret"></input>
+                    </form>
+                [% ELSE %]
+                    <p>The Google login has been successfully set up.</p>
+                    <a href="/init/admin" class="btn btn-primary">Create Admin User</a>
+                [% END %]
+            </div>
+        </div>
+    </div>
+</div>

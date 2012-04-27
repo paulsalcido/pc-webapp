@@ -1,0 +1,17 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        [% PROCESS init/include/navbar.tt active_tab="admin" %] 
+        <div class="span9">
+            <div class="hero-unit">
+                <h1>Create Admin User</h1>
+                [% UNLESS c.session.member %]
+                    <p>When you click on the button below, you will be forwarded to the Google OpenID endpoint.  You will login with your Google ID and user information (no passwords!) will be sent back to [% c.config.name %] when it is done.  The first user created will be the administrator.</p>
+                    <a href="/login/google" class="btn btn-primary">Create Admin User</a>
+                [% ELSE %]
+                    <p>You have created the admin user [% c.session.member.display_name %].  Your application is now ready for business.  In order to avoid the initialization pages from appearing in the future (and putting you at risk!) please remove the value 'initialize' from your base configuration file.  You might also want to remove the init Controller.</p>
+                    <a href="/" class="btn btn-primary">Done!</a>
+                [% END %]
+            </div>
+        </div>
+    </div>
+</div>

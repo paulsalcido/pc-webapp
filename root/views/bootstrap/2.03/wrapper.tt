@@ -43,7 +43,10 @@
             <ul class="nav">
               <li class="active"><a href="/">Home</a></li>
               [% IF c.session.member.id %]
-                <li><a href="/me">My Page</a></li>
+                <li><a href="/me">[% c.session.member.display_name %]</a></li>
+                [% IF c.session.member.roles.admin %]
+                    <li><a href="/admin">Admin</a></li>
+                [% END %]
               [% END %]
               <li><a href="/about">About</a></li>
               <li><a href="/contact">Contact</a></li>
@@ -53,6 +56,13 @@
       </div>
     </div>
     <div class="container">
+        [% IF c.session.member.roles.admin AND c.config.initialize %]
+            <div class="alert">
+                <button class="close" data-dismiss="alert">x</button>
+                <strong>Warning!</strong>
+                It appears that this site still has initialize set in its config!  This could be a major security issue!
+            </div>
+        [% END %]
         [% content %]
     </div>
   </body>
