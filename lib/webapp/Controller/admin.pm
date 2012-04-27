@@ -28,7 +28,25 @@ sub index :Path :Args(0) {
 sub deploy :Local {
     my ( $self, $c ) = @_;
     $c->model('WebAppDB')->schema->deploy;
-    #$c->stash->{deployment_statements} = [ $c->model('WebAppDB')->schema->deployment_statements ];
+}
+
+sub loginsetup :Local {
+    my ( $self, $c ) = @_;
+    my $google_oid = $c->model('WebAppDB::OpenIDEndpoint')->find({name => 'google'});
+    if ( $c->request->params->{'google-openid-secret'} ) {
+        my $newoid = $c->request->params->{'google-openid-secret'};
+        if ( $google_oid && $google_oid->openid_secret ne $newoid ) {
+            $google_oid->update({ openid_secret => $newoid });
+        } else {
+            $google_oid = $c->model('WebAppDB::OpenIDEndpoint')->create({
+                id => $c->uuid,
+                name => 'google',
+                openid_secret => $newoid,
+                endpoint => 'https://www.google.com/accounts/o8/id',
+            });
+        }
+    }
+    $c->stash->{google_oid} = $google_oid;
 }
 
 sub end :Private {

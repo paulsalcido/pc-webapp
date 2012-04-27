@@ -3,6 +3,7 @@ use Moose;
 use namespace::autoclean;
 
 use Catalyst::Runtime 5.80;
+use UUID;
 
 # Set flags and add plugins for the application.
 #
@@ -71,5 +72,12 @@ This library is free software. You can redistribute it and/or modify
 it under the same terms as Perl itself.
 
 =cut
+
+sub uuid {
+    my ($str,$uuid) = ();
+    UUID::generate($str);
+    UUID::unparse($str,$uuid);
+    return $uuid;
+}
 
 1;

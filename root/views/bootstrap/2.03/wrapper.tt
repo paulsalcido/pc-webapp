@@ -55,18 +55,8 @@
   </body>
 
     <!-- late loading javascript -->
+
     <script src="/static/bootstrap/2.03/js/jquery.js"></script>
-    <script src="/static/bootstrap/2.03/js/bootstrap-transition.js"></script>
-    <script src="/static/bootstrap/2.03/js/bootstrap-alert.js"></script>
-    <script src="/static/bootstrap/2.03/js/bootstrap-modal.js"></script>
-    <script src="/static/bootstrap/2.03/js/bootstrap-dropdown.js"></script>
-    <script src="/static/bootstrap/2.03/js/bootstrap-scrollspy.js"></script>
-    <script src="/static/bootstrap/2.03/js/bootstrap-tab.js"></script>
-    <script src="/static/bootstrap/2.03/js/bootstrap-tooltip.js"></script>
-    <script src="/static/bootstrap/2.03/js/bootstrap-popover.js"></script>
-    <script src="/static/bootstrap/2.03/js/bootstrap-button.js"></script>
-    <script src="/static/bootstrap/2.03/js/bootstrap-collapse.js"></script>
-    <script src="/static/bootstrap/2.03/js/bootstrap-carousel.js"></script>
-    <script src="/static/bootstrap/2.03/js/bootstrap-typeahead.js"></script>
+    <script src="/static/bootstrap/2.03/js/bootstrap.js"></script>
 
 </html>

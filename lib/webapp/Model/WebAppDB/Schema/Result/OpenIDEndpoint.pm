@@ -1,4 +1,4 @@
-package webapp::Model::WebAppDB::Schema::Result::Member;
+package webapp::Model::WebAppDB::Schema::Result::OpenIDEndpoint;
 
 use strict;
 use warnings;
@@ -9,7 +9,7 @@ use namespace::autoclean;
 extends 'DBIx::Class::Core';
 
 __PACKAGE__->load_components("InflateColumn::DateTime");
-__PACKAGE__->table("member");
+__PACKAGE__->table("openid_endpoint");
 __PACKAGE__->add_columns(
   "id",
   { 
@@ -17,7 +17,19 @@ __PACKAGE__->add_columns(
     default_value => undef, 
     is_nullable => 0, 
   },
-  "display_name",
+  "endpoint",
+  {
+    data_type => "character varying",
+    default_value => undef,
+    is_nullable => 0,
+  },
+  "openid_secret",
+  {
+    data_type => "character varying",
+    default_value => undef,
+    is_nullable => 0,
+  },
+  "name",
   {
     data_type => "character varying",
     default_value => undef,
@@ -39,11 +51,12 @@ __PACKAGE__->add_columns(
   },
 );
 __PACKAGE__->set_primary_key('id');
+__PACKAGE__->add_unique_constraint(['endpoint']);
+__PACKAGE__->add_unique_constraint(['name']);
 __PACKAGE__->has_many(
     'openids',
     'webapp::Model::WebAppDB::Schema::Result::OpenID',
-    { 'foreign.member' => 'self.id' }
+    { 'foreign.openid' => 'self.id' },
 );
 
-# You can replace this text with custom content, and it will be preserved on regeneration
 1;
