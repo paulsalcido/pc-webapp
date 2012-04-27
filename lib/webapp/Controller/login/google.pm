@@ -127,6 +127,10 @@ sub check :Local :Args(0) {
                 $member->update({display_name => $fullname});
             }
             $c->stash->{member} = $member;
+            $c->session->{member} = {
+                id => $member->id,
+                display_name => $member->display_name,
+            };
         },
         error => sub {
             my $err = shift;

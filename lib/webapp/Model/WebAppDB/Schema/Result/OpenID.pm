@@ -66,7 +66,7 @@ __PACKAGE__->belongs_to(
     { id => 'member' }
 );
 __PACKAGE__->belongs_to(
-    'member',
+    'openid_endpoint',
     'webapp::Model::WebAppDB::Schema::Result::OpenIDEndpoint',
     { id => 'openid_endpoint' }
 );

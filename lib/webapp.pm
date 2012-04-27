@@ -21,6 +21,9 @@ use Catalyst qw/
     -Debug
     ConfigLoader
     Static::Simple
+    Session
+    Session::Store::Memcached
+    Session::State::Cookie
 /;
 
 extends 'Catalyst';
