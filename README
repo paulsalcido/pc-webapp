@@ -7,4 +7,4 @@ apt-get
     postgresql (database, obvious)
 
 cpan
-    sudo cpan install Catalyst::Plugin::Session::Store::Memcached
+    sudo cpan install Catalyst::Plugin::Session::Store::Memcached Facebook::Graph

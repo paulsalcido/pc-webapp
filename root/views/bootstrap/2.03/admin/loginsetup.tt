@@ -1,7 +1,24 @@
-<h1>Login Setup</h1>
-<h2>Google OpenID</h2>
-<form method="post" class="well">
-    <label for="google-openid-secret">Google OpenID Secret</label>
-    <input name="google-openid-secret" type="text" class="span3" [% UNLESS google_oid %]placeholder="Enter secret..."[% ELSE %]value=[% google_oid.openid_secret %][% END %]></input>
-    <input type="submit" value="Set OpenID Secret"></input>
-</form>
+<div class="container-fluid">
+    <div class="row-fluid">
+        [% PROCESS admin/include/navbar.tt active_tab="logins" %]
+        <div class="span9">
+            <h1>Login Setup</h1>
+            <h2>Google OpenID</h2>
+            <form method="post" class="well">
+                <label for="google-openid-secret">Google OpenID Secret</label>
+                <input name="google-openid-secret" type="text" class="span3" [% UNLESS google_oid %]placeholder="Enter secret..."[% ELSE %]value=[% google_oid.openid_secret %][% END %]></input>
+                <input type="submit" value="Set OpenID Secret"></input>
+            </form>
+            <h2>Facebook App Credentials</h2>
+            <form method="post" class="well">
+                <label for="facebook-app-name">Application Name</label>
+                <input name="facebook-app-name" type="text" class="span3" [% UNLESS facebook_credentials.app_name %]placeholder="Enter app name..."[% ELSE %]value="[% facebook_credentials.app_name %]"[% END %]></input>
+                <label for="facebook-app-key">Application Key</label>
+                <input name="facebook-app-key" type="text" class="span3" [% UNLESS facebook_credentials.api_key %]placeholder="Enter app key..."[% ELSE %]value=[% facebook_credentials.api_key %][% END %]></input>
+                <label for="facebook-app-secret">Application Secret</label>
+                <input name="facebook-app-secret" type="text" class="span3" [% UNLESS facebook_credentials.api_secret %]placeholder="Enter secret..."[% ELSE %]value=[% facebook_credentials.api_secret %][% END %]></input>
+                <input type="submit" value="Set App Credentials"></input>
+            </form>
+        </div>
+    </div>
+</div>

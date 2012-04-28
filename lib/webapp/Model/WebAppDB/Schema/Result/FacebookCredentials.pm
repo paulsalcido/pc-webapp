@@ -1,4 +1,4 @@
-package webapp::Model::WebAppDB::Schema::Result::Member;
+package webapp::Model::WebAppDB::Schema::Result::FacebookCredentials;
 
 use strict;
 use warnings;
@@ -9,7 +9,7 @@ use namespace::autoclean;
 extends 'DBIx::Class::Core';
 
 __PACKAGE__->load_components("InflateColumn::DateTime");
-__PACKAGE__->table("member");
+__PACKAGE__->table("facebook_credentials");
 __PACKAGE__->add_columns(
   "id",
   { 
@@ -17,7 +17,25 @@ __PACKAGE__->add_columns(
     default_value => undef, 
     is_nullable => 0, 
   },
-  "display_name",
+  "app_name",
+  {
+    data_type => "character varying",
+    default_value => undef,
+    is_nullable => 0,
+  },
+  "api_key",
+  {
+    data_type => "character varying",
+    default_value => undef,
+    is_nullable => 0,
+  },
+  "api_secret",
+  {
+    data_type => "character varying",
+    default_value => undef,
+    is_nullable => 0,
+  },
+  "key_name",
   {
     data_type => "character varying",
     default_value => undef,
@@ -39,22 +57,12 @@ __PACKAGE__->add_columns(
   },
 );
 __PACKAGE__->set_primary_key('id');
-
-__PACKAGE__->has_many(
-    'memberroles',
-    'webapp::Model::WebAppDB::Schema::Result::MemberRole',
-    { 'foreign.member' => 'self.id' }
-);
-__PACKAGE__->has_many(
-    'facebook_approvals',
-    'webapp::Model::WebAppDB::Schema::Result::FacebookApproval',
-    { 'foreign.member' => 'self.id' }
-);
+__PACKAGE__->add_unique_constraint(['key_name']);
+__PACKAGE__->add_unique_constraint(['api_key']);
 __PACKAGE__->has_many(
     'openids',
     'webapp::Model::WebAppDB::Schema::Result::OpenID',
-    { 'foreign.member' => 'self.id' }
+    { 'foreign.openid' => 'self.id' },
 );
 
-# You can replace this text with custom content, and it will be preserved on regeneration
 1;

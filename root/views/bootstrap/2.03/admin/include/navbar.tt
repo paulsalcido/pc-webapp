@@ -1,0 +1,8 @@
+<div class="span3">
+    <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+            <li class="nav-header">Administration</li>
+            <li[% IF active_tab == "logins" %] class="active"[% END %]><a href="/admin/loginsetup">Login Setup</a></li>
+        </ul>
+    </div>
+</div>

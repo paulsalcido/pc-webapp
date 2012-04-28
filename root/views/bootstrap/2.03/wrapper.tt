@@ -57,7 +57,8 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Login<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/login/google"><img src="/static/images/google4.png"></img>Google</a>
+                        <li><a href="/login/google"><img src="/static/images/social_google_box_32.png"></img>Google</a>
+                        <li><a href="/login/facebook"><img src="/static/images/social_facebook_box_blue_32.png"></img>Facebook</a>
                     </ul>
                 </li>
               [% END %]
