@@ -1,3 +1,7 @@
+[% META
+    page = 'home'
+%]
+
 <header class="jumbotron subhead" id="overview">
     <h1>[% c.config.name %]</h1>
 </header>

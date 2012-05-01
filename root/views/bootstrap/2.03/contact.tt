@@ -1,3 +1,7 @@
+[% META
+    page = 'contact'
+%]
+
 <div class="jumbotron subhead">
     <h1>Contact</h1>
 </div>

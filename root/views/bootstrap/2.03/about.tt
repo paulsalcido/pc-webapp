@@ -1,3 +1,7 @@
+[% META
+    page = 'about'
+%]
+
 <header class="jumbotron subhead" id="overview">
     <h1>About</h1>
     <div class="subnav">

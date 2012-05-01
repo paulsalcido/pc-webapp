@@ -1,0 +1,5 @@
+[% META
+    page = 'profile'
+%]
+
+<h1>[% c.session.member.display_name %]</h1>
