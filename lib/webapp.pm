@@ -48,7 +48,6 @@ __PACKAGE__->config(
 # Start the application
 __PACKAGE__->setup();
 
-
 =head1 NAME
 
 webapp - Catalyst based application
@@ -59,20 +58,15 @@ webapp - Catalyst based application
 
 =head1 DESCRIPTION
 
-[enter your description here]
+This is a base webapp for use in my application development.  I've included facebook and google openid login capabilities, and put in a front end using template toolkit and twitter bootstrap for html/css work.
 
-=head1 SEE ALSO
+=head1 EXPANDED FUNCTIONALITY
 
-L<webapp::Controller::Root>, L<Catalyst>
+=head2 uuid
 
-=head1 AUTHOR
+    my $uuid = $c->uuid;
 
-Paul Salcido,,,
-
-=head1 LICENSE
-
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
+This subroutine is used to produce new uuids for the application database entries.
 
 =cut
 
@@ -83,6 +77,15 @@ sub uuid {
     return $uuid;
 }
 
+=head2 refresh_member_session
+
+    $c->session->{member}->{id} = '...';
+    $c->refresh_member_session;
+
+This will fill in additional member session information based off of the current session member.id.
+
+=cut
+
 sub refresh_member_session {
     my ($self) = @_;
     my $id = $self->session->{member}->{id};
@@ -92,5 +95,20 @@ sub refresh_member_session {
         $self->session->{member}->{roles}->{$mr->role->name} = 1;
     }
 }
+
+=head1 SEE ALSO
+
+L<webapp::Controller::Root>, L<Catalyst>
+
+=head1 AUTHOR
+
+Paul Salcido, paulsalcido.79@gmail.com
+
+=head1 LICENSE
+
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut
 
 1;
