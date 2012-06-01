@@ -21,7 +21,7 @@ L<webapp>
 
 =head1 AUTHOR
 
-Paul Salcido,,,
+Paul Salcido,paulsalcido.79@gmail.com,Twitter: @PaulCodeMonkey
 
 =head1 LICENSE
 

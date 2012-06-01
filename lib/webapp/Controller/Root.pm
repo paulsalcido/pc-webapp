@@ -16,9 +16,10 @@ webapp::Controller::Root - Root Controller for webapp
 
 =head1 DESCRIPTION
 
-[enter your description here]
+The root controller for webapp includes logout, contact, about, along with the main index.  Almost all of these are simply placeholders for the template files.
 
 =head1 METHODS
+
 
 =head2 index
 
@@ -30,6 +31,12 @@ sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 }
 
+=head2 logout
+
+Removes the user session information under 'member'.
+
+=cut
+
 sub logout :Local {
     my ( $self, $c ) = @_;
     
@@ -38,8 +45,20 @@ sub logout :Local {
     }
 }
 
+=head2 contact
+
+The contact page.
+
+=cut
+
 sub contact :Local {
 }
+
+=head2 about
+
+The about page.
+
+=cut
 
 sub about :Local {
 }
@@ -58,7 +77,7 @@ sub default :Path {
 
 =head2 end
 
-Attempt to render a view, if needed.
+Forwards to the main view (Template Toolkit/Twitter Bootstrap).
 
 =cut
 
@@ -70,7 +89,7 @@ sub end :Private {
 
 =head1 AUTHOR
 
-Paul Salcido,,,
+Paul Salcido,paulsalcido.79@gmail.com,twitter: @PaulCodeMonkey
 
 =head1 LICENSE
 

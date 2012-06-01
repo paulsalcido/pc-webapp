@@ -10,20 +10,25 @@ webapp::Controller::admin - Catalyst Controller
 
 =head1 DESCRIPTION
 
-Catalyst Controller.
+This controller has various admin functions that allows for the control of aspects of the utility of webapp.
 
 =head1 METHODS
 
 =cut
 
-
-=head2 index
+=head2 index (Root)
 
 =cut
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 }
+
+=head2 loginsetup (Local)
+
+Allows you to setup various login types (Currently Facebook Credentials and Openid Endpoint for Google.)
+
+=cut
 
 sub loginsetup :Local {
     my ( $self, $c ) = @_;
@@ -67,6 +72,12 @@ sub loginsetup :Local {
     $c->stash->{facebook_credentials} = $facebook_cred;
 }
 
+=head2 end
+
+This forwards to the view main (Template Toolkit/Twitter Bootstrap)
+
+=cut
+
 sub end :Private {
     my ( $self, $c ) = @_;
     $c->forward( $c->view('main') );
@@ -75,7 +86,7 @@ sub end :Private {
 
 =head1 AUTHOR
 
-Paul Salcido,,,
+Paul Salcido,paulsalcido.79@manta.com
 
 =head1 LICENSE
 

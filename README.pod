@@ -1,0 +1,55 @@
+=head1 NAME
+
+webapp/README
+
+=head1 DESCRIPTION
+
+This is the README pod for the application code base 'webapp'.  This is a Catalyst application that already has a few nice things built into the Model (a base database), the Controllers (some init/admin page possibilities) and login utilities, as well as a Template Toolkit front end based off of Twitter Bootstrap.
+
+=head1 SETUP
+
+The following should be added to the Makefile.
+
+On ubuntu, this requires that a few libraries be installed and setup before you can use this.  On my last test run from a completed box, I had to do the following:
+
+=head2 apt-get installations
+
+=over 4
+
+=item libcatalyst-perl
+
+=item libcatalyst-devel-perl
+
+=item libcatalyst-view-tt-perl
+
+=item libuuid-perl
+
+=item libnet-openid-consumer-perl
+
+=item memcached
+
+=item postgresql
+
+=back
+
+I coded this with postgresql in mind.  The problem is the default values for timestamps currently in the Model ResultSet classes.  it is set to \"now()" which will break in many databases, I think.
+
+=head2 cpan install
+
+=over 4
+
+=item Catalyst::Plugin::Session::Store::Memcached
+
+=item Facebook::Graph
+
+=back
+
+=head1 AUTHOR
+
+Paul Salcido, paulsalcido.79@gmail.com
+
+=head1 LICENSE
+
+This library is free software. You can redistribute it and/or modify it under the same terms as Perl itself.
+
+=cut

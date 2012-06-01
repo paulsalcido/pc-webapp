@@ -10,12 +10,13 @@ webapp::Controller::profile - Catalyst Controller
 
 =head1 DESCRIPTION
 
-Catalyst Controller.
+This allows a person to view their profile.
+
+TODO: Build profile information output.
 
 =head1 METHODS
 
 =cut
-
 
 =head2 index
 
@@ -23,14 +24,16 @@ Catalyst Controller.
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
-
-    $c->response->body('Matched webapp::Controller::profile in profile.');
 }
 
+sub end :Private {
+    my ($self , $c ) = @_;
+    $c->forward($c->view('main'));
+}
 
 =head1 AUTHOR
 
-Paul Salcido,,,
+Paul Salcido,paulsalcido.79@gmail.com,twitter: @PaulCodeMonkey
 
 =head1 LICENSE
 

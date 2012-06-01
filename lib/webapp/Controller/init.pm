@@ -10,14 +10,17 @@ webapp::Controller::init - Catalyst Controller
 
 =head1 DESCRIPTION
 
-Catalyst Controller.
+Catalyst controller that allows for the initialization of the system.
+
+WARNING: After you have completed initialization, it is strongly recommended that you remove the 'initialize' line from the configuration.
 
 =head1 METHODS
 
 =cut
 
+=head2 begin
 
-=head2 index
+Checks to make sure that the 'initialize' configuration option is set, if it is not, forwards to root.
 
 =cut
 
@@ -31,9 +34,19 @@ sub begin :Private {
     }
 }
 
+=head2 index
+
+=cut
+
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 }
+
+=head2 deploy
+
+Deploys the schema described by the model 'WebAppDB'.
+
+=cut
 
 sub deploy :Local {
     my ( $self, $c ) = @_;
@@ -48,6 +61,12 @@ sub deploy :Local {
         };
     }
 }
+
+=head2 loginsetup
+
+Allows the setup of the Google OpenID Secret that will be stored in the database and used for login capabilities.  You never want to check these credentials into the code base, so I figured that the database is a good alternative.
+
+=cut
 
 sub loginsetup :Local {
     my ( $self, $c ) = @_;
@@ -73,6 +92,12 @@ sub loginsetup :Local {
     $c->stash->{google_oid} = $google_oid;
 }
 
+=head2 admin
+
+This allows for the creation of an admin user.  Will use the login utility and forward back here (some info here is in the template).
+
+=cut
+
 sub admin :Local {
     my ( $self,$c ) = @_;
 
@@ -91,6 +116,12 @@ sub admin :Local {
     }
 }
 
+=head2 end
+
+Forwards to the main view.
+
+=cut
+
 sub end :Private {
     my ( $self, $c ) = @_;
     
@@ -99,7 +130,7 @@ sub end :Private {
 
 =head1 AUTHOR
 
-Paul Salcido,,,
+Paul Salcido,paulsalcido.79@gmail.com,twitter: @PaulCodeMonkey
 
 =head1 LICENSE
 
