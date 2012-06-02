@@ -39,6 +39,10 @@ This represents the unique id (uuid) of the current row.
 
 This represents the name of the role.
 
+=item default_role
+
+This determines whether or not an item is a default role.
+
 =item created
 
 The date this role was created.
@@ -63,6 +67,12 @@ __PACKAGE__->add_columns(
     data_type => "character varying",
     default_value => undef,
     is_nullable => 0,
+  },
+  "default_role",
+  {
+    data_type => "boolean",
+    default_value => undef,
+    is_nullable => 1,
   },
   "created",
   {

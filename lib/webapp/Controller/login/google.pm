@@ -124,6 +124,7 @@ sub check :Local :Args(0) {
                         id => $c->uuid,
                         display_name => $fullname,
                     });
+                    $member->add_default_roles({ c => $c });
                     $oid = $member->openids->create({
                         id => $c->uuid,
                         identity => $identity,

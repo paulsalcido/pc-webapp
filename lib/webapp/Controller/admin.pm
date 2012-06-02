@@ -85,10 +85,11 @@ sub roles :Local {
     my ( $self, $c ) = @_;
     if ( $c->request->method eq 'POST' ) {
         my $role = $c->request->params->{'role-name'};
+        my $default = $c->request->params->{'role-default'};
         if ( $role ) {
             my $hasrole = $c->model('WebAppDB::Role')->find({ name => $role });
             unless ( $hasrole ) {
-                $c->model('WebAppDB::Role')->create({ id => $c->uuid , name => $role });
+                $c->model('WebAppDB::Role')->create({ id => $c->uuid , name => $role , default_role => $default });
             } else {
                 push(@{$c->stash->{errors}},"Role with name: $role already exists.");
             }

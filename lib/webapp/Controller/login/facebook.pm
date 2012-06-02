@@ -91,6 +91,7 @@ sub check :Local {
                     id => $c->uuid,
                     display_name => $user->{name},
                 });
+                $member->add_default_roles({ c => $c });
                 $member->facebook_approvals->create({
                     id => $c->uuid,
                     uid => $user->{id},

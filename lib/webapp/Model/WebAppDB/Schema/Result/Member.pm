@@ -138,7 +138,7 @@ __PACKAGE__->has_many(
 
 =cut
 
-=head2 set_roles({ roleids => [ ... ] })
+=head2 set_roles({ roleids => [ ... ] , c => ... })
 
 Sets a users roles to a list of ids.  The argument is the list of role ids that they will have after this is run.  It will also delete roles that are not included in the list.
 
@@ -172,6 +172,23 @@ sub set_roles {
         }
     }
 }
+
+=head2 add_default_roles({ c => ... });
+
+Creates the default member roles for a user.
+
+=cut
+
+sub add_default_roles {
+    my $self = shift;
+    my $p = shift;
+    my $c = $p->{c};
+    my @default_roles = $c->model('WebAppDB::Role')->search({ default_role => 'true' });
+    foreach my $role ( @default_roles ) {
+        $self->memberroles->create({ id => $c->uuid , member => $self , role => $role });
+    }
+}
+
 
 =head1 SEE ALSO
 
