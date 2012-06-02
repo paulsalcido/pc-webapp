@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>[% c.name %]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="/static/bootstrap/2.03/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+    <link href="/static/bootstrap/2.03/css/bootstrap-responsive.css" rel="stylesheet">
+    [% IF c.config.google_analytics_account %]
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-XXXXX-X']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    [% END %]
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/">[% c.config.name %]</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li[% IF template.page == 'home' %] class="active"[% END %]><a href="/">Home</a></li>
+              [% IF c.session.member.id %]
+                <li class="dropdown[% IF template.page == 'profile' %] active[% END %]">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">[% c.session.member.display_name %]<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/profile">Profile</a>
+                        <li><a href="/logout">Logout</a>
+                        [% IF c.session.member.roles.admin %]
+                        <li><a href="/admin">Admin</a>
+                        [% END %]
+                    </ul>
+                </li>
+              [% ELSE %]
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Login<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/login/google">Google</a>
+                        <li><a href="/login/facebook">Facebook</a>
+                    </ul>
+                </li>
+              [% END %]
+              <li[% IF template.page == 'about' %] class="active"[% END %]><a href="/about">About</a></li>
+              <li[% IF template.page == 'contact' %] class="active"[% END %]><a href="/contact">Contact</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+        [% IF c.session.member.roles.admin AND c.config.initialize %]
+            <div class="alert">
+                <button class="close" data-dismiss="alert">x</button>
+                <strong>Warning!</strong>
+                It appears that this site still has initialize set in its config!  This could be a major security issue!
+            </div>
+        [% END %]
+        [% content %]
+    </div>
+  </body>
+
+    <!-- late loading javascript -->
+
+    <script src="/static/bootstrap/2.03/js/jquery.js"></script>
+    <script src="/static/bootstrap/2.03/js/bootstrap.js"></script>
+
+</html>

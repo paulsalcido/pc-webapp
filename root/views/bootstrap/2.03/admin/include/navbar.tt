@@ -1,0 +1,9 @@
+<div class="span3">
+    <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+            <li class="nav-header">Administration</li>
+            <li[% IF active_tab == "logins" %] class="active"[% END %]><a href="/admin/loginsetup">Login Setup</a></li>
+            <li[% IF active_tab == "roles" %] class="active"[% END %]><a href="/admin/roles">Roles</a></li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,92 @@
+[% META
+    page = 'about'
+%]
+
+<header class="jumbotron subhead" id="overview">
+    <h1>About</h1>
+    <div class="subnav">
+        <ul class="nav nav-pills">
+            <li><a href="#app">About [% c.config.name %]</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Open Source
+                <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#perl-catalyst">Perl Catalyst</a></li>
+                    <li><a href="#postgres">PostgreSQL Database</a></li>
+                    <li><a href="#memcached">Memcached</a></li>
+                    <li><a href="#bootstrap">Twitter Bootstrap</a></li>
+                    <li><a href="#tt">Template Toolkit</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</header>
+<section id="app">
+    <div class="page-header">
+        <h2>About [% c.config.name %] <small> A small app for new application development</small></h2>
+    </div>
+    <div class="row">
+        <div class="span12">
+            <h3>Quick App Development</h3>
+            <p>
+                This application, unfortunately named webapp, is a base starting point for applications willing to use a very specific set of tools when they start development.  The original purpose was to give me a starting point for applications that I wanted to write, and given that it might one day expand to use by others as an open source utility means that I want to leave this as open as possible.
+            </p>
+            <p>
+                In developing this, I chose tools that I am comfortable with and that allow for very fast web development.  Perl is a very sparse and fast language.  Catalyst is an excellent web application development platform with a high learning curve, but very fast development times.  DBIX for perl is a very good way to get things into a database, and it can deploy itself.  Memcached is a high quality choice for any kind of caching.  Finally, Template Toolkit and Twitter Bootstrap enable high quality and high speed front end development.
+            </p>
+            <p>
+                When you build your web application, please update this page with information about your web application, but please also continue to leave information about the Open Source products that you use, and if you really take off, please consider donating to their development efforts.
+            </p>
+            <p>
+                <b>Happy Hacking!</b>
+            </p>
+        </div>
+    </div>
+</section>
+<section id="perl-catalyst">
+    <div class="page-header">
+        <h2>Perl Catalyst <small>A high quality web application framework</small></h2>
+    </div>
+    <div class="row">
+        <div class="span12">
+            <p>
+                <b>Perl Catalyst</b> is a high quality and very fast application framework.  It has a high learning curve, but spending the time is worth it.  Learn more at <a href="http://www.catalystframework.org/">Catalyst | Perl MVC web application framework</a>
+            </p>
+        </div>
+    </div>
+</section>
+<section id="postgres">
+    <div class="page-header">
+        <h2>PostgreSQL Database</h2>
+    </div>
+    <p>
+        Postgres offers a world class database that can meet the needs of the vast majority of businesses, and while offering very high ANSI compliance compared to other open source offerings.  Learn more at <a href="http://www.postgresql.org/">PostgreSQL</a>
+    </p>
+<section>
+
+<section id="memcached">
+    <div class="page-header">
+        <h2>Memcached</h2>
+    </div>
+    <p>
+        For session and query handling, this application uses the high speed and well known Memcached.  Memcache is an in memory key store basically built ready made for website development.  For more information, check out <a href="http://memcached.org/">memcached - a distributed memory object caching system</a>, and the incredible list of websites taking advantage of it.
+    </p>
+<section>
+
+<section id="bootstrap">
+    <div class="page-header">
+        <h2>Twitter Bootstrap <small>High quality design for engineers</small></h2>
+    </div>
+    <p>
+        For designing websites that have responsive design, one of the easiest to use modern CSS and Javascript tools is Twitter Bootstrap.  By using this as a starting point in the main wrapper, it is easy to design high quality utilities that work on phones and browsers, and that look good while doing it.  Read more at <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>.
+    </p>
+</section>
+<section id="tt">
+    <div class="page-header">
+        <h2>Template Toolkit <small>An excellent perl templating system</small></h2>
+    </div>
+    <p>
+        This application by default takes advantage of template toolkit via automatic handlers from CPAN built for Catalyst.  It enables very fast development of pages for websites, and has some excellent caching capabilities as well.  Read more about it at <a href="http://template-toolkit.org/">Template Toolkit</a>.
+    </p>
+</section>

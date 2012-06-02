@@ -1,0 +1,20 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        [% PROCESS admin/include/navbar.tt %] 
+        <div class="span9">
+            <h1>Member: [% member.display_name %]</h1>
+            <h2>Roles</h2>
+            <form class="well" method=post>
+                <input type="hidden" name="action" value="role-update"></input>
+                <table class="table table-striped">
+                [% FOREACH role IN roles %]
+                    <tr>
+                        <td><input type="checkbox" name="roles" value="[% role.id %]"[% IF role.hasrole %] checked[% END %]>[% role.name %]</input></td>
+                    </tr>
+                [% END %]
+                </table>
+                <input type="submit"></input>
+            </form>
+        </div>
+    </div>
+</div>

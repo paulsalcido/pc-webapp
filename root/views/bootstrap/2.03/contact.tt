@@ -1,0 +1,22 @@
+[% META
+    page = 'contact'
+%]
+
+<div class="jumbotron subhead">
+    <h1>Contact</h1>
+</div>
+<section id="contact">
+    <div class="row">
+        <div class="span4">
+            <h3>Developer</h3>
+            <p>webapp was originally developed by Paul Salcido, using Perl Catalyst, Template Toolkit, and DBIx.  Originally designed with postgres and memcached.</p>
+        </div>
+        <div class="span4">
+            <h3>Issues?</h3>
+            <p></p>
+        </div>
+        <div class="span4">
+            <h3>Suggestions?</h3>
+        </div>
+    </div>
+</section>

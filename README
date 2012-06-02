@@ -1,0 +1,10 @@
+Run script/webapp_server.pl to test the application.
+
+apt-get
+    libuuid-perl
+    libnet-openid-consumer-perl
+    memcached (should probably be ha handled)
+    postgresql (database, obvious)
+
+cpan
+    sudo cpan install Catalyst::Plugin::Session::Store::Memcached Facebook::Graph

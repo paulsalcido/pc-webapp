@@ -1,0 +1,8 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        [% PROCESS admin/include/navbar.tt %] 
+        <div class="span9">
+            <h1>Site Administration</h1>
+        </div>
+    </div>
+</div>

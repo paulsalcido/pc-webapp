@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        [% PROCESS init/include/navbar.tt active_tab="deploy" %] 
+        <div class="span9">
+            <div class="hero-unit">
+                [% UNLESS c.request.params.deploy %]
+                <h1>Deploy Database</h1>
+                <p>In order to store data, this application needs to deploy a database schema. Please validate the following before continuing:</p>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Option</th>
+                        <th>Value</th>
+                    <tr>
+                    <tr>
+                        <td>Database</td>
+                        <td>[% c.config.item('Model::WebAppDB').connect_info.dsn %]</td>
+                    </tr>
+                    <tr>
+                        <td>User</td>
+                        <td>[% c.config.item('Model::WebAppDB').connect_info.user %]</td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td>[% c.config.item('Model::WebAppDB').connect_info.password %]</td>
+                    </tr>
+                </table>
+                <p>If these values are incorrect, then update the configuration file, and then restart the application, and refresh this web page.</p>
+                <form method="get">
+                    <input type="hidden" name="deploy" value="1"></input>
+                    <input type="submit" class="btn btn-primary" value="Deploy Database"></input>
+                </form>
+                [% ELSE %]
+                <h1>Database Deployed</h1>
+                <p>The database schema should now be deployed.  It would be wise to double check that it actually happened before moving on.</p>
+                <a href="/init/loginsetup" class="btn btn-primary">Setup Logins</a>
+                [% END %]
+            </div>
+        </div>
+    </div>
+</div>
