@@ -1,0 +1,24 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        [% PROCESS admin/include/navbar.tt %] 
+        <div class="span9">
+            <h1>Roles</h1>
+            <form class="well" method="post">
+                <input name="role-name" placeHolder="New Role Name" class="span9"></input>
+                <input type="submit" class="btn btn-primary" value="Create New Role"></input>
+            </form>
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <th>Role ID</th>
+                    <th>Role Name</th>
+                </tr>
+                [% FOREACH role IN roles %]
+                    <tr>
+                        <td>[% role.id %]</td>
+                        <td>[% role.name %]</td>
+                    </tr>
+                [% END %]
+            </table>
+        </div>
+    </div>
+</div>

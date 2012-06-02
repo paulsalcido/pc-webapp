@@ -2,6 +2,9 @@ package webapp::Controller::admin;
 use Moose;
 use namespace::autoclean;
 
+# TODO: Remove post debug
+use Data::Dumper;
+
 BEGIN {extends 'Catalyst::Controller'; }
 
 =head1 NAME
@@ -35,7 +38,7 @@ sub loginsetup :Local {
     my $webapp = $c->config->{name};
     my $google_oid = $c->model('WebAppDB::OpenIDEndpoint')->find({name => 'google'});
     my $facebook_cred = $c->model('WebAppDB::FacebookCredentials')->find({ key_name => $webapp });
-    if ( $c->request->params->{'google-openid-secret'} ) {
+    if ( $c->request->method eq "POST" && $c->request->params->{'google-openid-secret'} ) {
         my $newoid = $c->request->params->{'google-openid-secret'};
         if ( $google_oid && $google_oid->openid_secret ne $newoid ) {
             $google_oid->update({ openid_secret => $newoid });
@@ -47,7 +50,7 @@ sub loginsetup :Local {
                 endpoint => 'https://www.google.com/accounts/o8/id',
             });
         }
-    } elsif ( $c->request->params->{'facebook-app-key'} ) {
+    } elsif ( $c->request->method eq "POST" && $c->request->params->{'facebook-app-key'} ) {
         my $newappname = $c->request->params->{'facebook-app-name'};
         my $newappkey = $c->request->params->{'facebook-app-key'};
         my $newappsecret = $c->request->params->{'facebook-app-secret'};
@@ -70,6 +73,71 @@ sub loginsetup :Local {
     }
     $c->stash->{google_oid} = $google_oid;
     $c->stash->{facebook_credentials} = $facebook_cred;
+}
+
+=head2 roles
+
+This allows for new role creation.
+
+=cut
+
+sub roles :Local {
+    my ( $self, $c ) = @_;
+    if ( $c->request->method eq 'POST' ) {
+        my $role = $c->request->params->{'role-name'};
+        if ( $role ) {
+            my $hasrole = $c->model('WebAppDB::Role')->find({ name => $role });
+            unless ( $hasrole ) {
+                $c->model('WebAppDB::Role')->create({ id => $c->uuid , name => $role });
+            } else {
+                push(@{$c->stash->{errors}},"Role with name: $role already exists.");
+            }
+        }
+    }
+    $c->stash->{roles} = [ $c->model('WebAppDB::Role')->all() ];
+}
+
+=head2 member
+
+This allows for member modifications.
+
+=cut
+
+sub member :Local :Args(1) {
+    my ( $self, $c ) = @_;
+    my $member = $c->model('WebAppDB::Member')->find({ id => $c->request->arguments->[0] });
+    if ( $c->request->method eq "POST" ) {
+        # Permission/Deactivation check?
+        my $action = $c->request->params->{action};
+        if ( $action eq 'role-update' ) {
+            # Find roles, send to the user.  This should really be part of the user class.
+            my $roleids = $c->request->params->{roles};
+            if ( ! defined $roleids ) {
+                $roleids = [ ];
+            } elsif ( ! ref($roleids) ) {
+                $roleids = [ $roleids ];
+            }
+            $member->set_roles({roleids => $roleids,  c => $c });
+        } elsif ( $action eq 'deactivate' ) {
+            # Once again, for common placement, this should be part of the user class.
+        }
+    }
+    $c->stash->{member} = $member;
+    #$c->stash->{roles} = [ sort { $a->name <=> $b->name } $c->model('WebAppDB::Role')->all() ];
+    my $roles = [ map { { name => $_->name , id => $_->id } } $c->model('WebAppDB::Role')->all() ];
+    my @mroles = $member->memberroles->all();
+    my %mroles = ();
+    foreach my $mr ( @mroles ) {
+        $mroles{$mr->role->id} = $mr;
+    }
+    warn Dumper([ keys %mroles ]);
+    foreach my $role ( @$roles ) {
+        if ( defined $mroles{$role->{id}} ) {
+            $role->{hasrole} = 1;
+        }
+    }
+    warn Dumper($roles);
+    $c->stash->{roles} = $roles;
 }
 
 =head2 end

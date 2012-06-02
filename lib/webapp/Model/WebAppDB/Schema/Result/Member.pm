@@ -134,6 +134,45 @@ __PACKAGE__->has_many(
     { 'foreign.member' => 'self.id' }
 );
 
+=head1 SUBROUTINES
+
+=cut
+
+=head2 set_roles({ roleids => [ ... ] })
+
+Sets a users roles to a list of ids.  The argument is the list of role ids that they will have after this is run.  It will also delete roles that are not included in the list.
+
+=cut
+
+sub set_roles {
+    my $self = shift;
+    my $p = shift;
+    my $c = $p->{c};
+    my $roleids = $p->{roleids};
+    # Find roles that this user already has.
+    my @hasroles = $self->memberroles->all();
+    # Convert them into a hash for quick lookup.
+    my $hasroles = { };
+    foreach my $role ( @hasroles ) {
+        $hasroles->{$role->role->id} = 1;
+    }
+    # Add new roles / mark them as belonging.
+    # Also, mark already known and kept roles.
+    foreach my $roleid ( @$roleids ) {
+        unless ( $hasroles->{$roleid} ) {
+            # If the user doesn't have the role.
+            $self->memberroles->create({ id => $c->uuid, role => $roleid });
+        }
+        $hasroles->{$roleid} = 2;
+    }
+    # Remove undeserved roles.
+    foreach my $key ( keys %{$hasroles} ) {
+        if ( $hasroles->{$key} != 2 ) {
+            $self->memberroles->search({ role => $key })->delete;
+        }
+    }
+}
+
 =head1 SEE ALSO
 
 L<webapp::Model::WebAppDB>,L<webapp::Model::WebAppDB::Schema::Result::FacebookApproval>,L<webapp::Model::WebAppDB::Schema::Result::OpenID>
@@ -149,6 +188,4 @@ it under the same terms as Perl itself.
 
 =cut
 
-
-# You can replace this text with custom content, and it will be preserved on regeneration
 1;
