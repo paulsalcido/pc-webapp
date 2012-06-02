@@ -13,10 +13,12 @@
         </div>
         <div class="span4">
             <h3>Issues?</h3>
-            <p></p>
+            <p>Issues with the base webapp application should be posted to <a href="https://github.com/paulsalcido/pc-webapp/issues">The pc-webapp issues page</a>.</p>
         </div>
         <div class="span4">
             <h3>Suggestions?</h3>
+            <p>Want to add new features?  Contact my github account and talk to me about what you want to add.</p>
+            <p>Please note that I don't want to make this a platform for specific activities.  The plan is to give people a starting point for their development work.  Therefore, don't try to send me blogging software patches, forum patches, etc.  Focus on administrative tools that will make a good base web application.</p>
         </div>
     </div>
 </section>

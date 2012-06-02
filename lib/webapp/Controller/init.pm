@@ -57,6 +57,7 @@ sub deploy :Local {
             $c->model('WebAppDB::Role')->create({
                 id => $c->uuid,
                 name => 'admin',
+                default_role => 'false',
             });
         };
     }

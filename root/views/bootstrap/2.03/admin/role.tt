@@ -1,0 +1,13 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        [% PROCESS admin/include/navbar.tt %] 
+        <div class="span9">
+            <h1>Role: [% role.name %]</h1>
+            <form class="well" method=post>
+                <input type="text" name="role-name" value="[% role.name %]" placeHolder="Enter Role Name" class="span4"></input>
+                <input type="checkbox" name="default-role"[% IF role.default_role == 'true' %] checked[% END %]>Default Role</input>
+                <input type="submit" value="Update Role"></input>
+            </form>
+        </div>
+    </div>
+</div>

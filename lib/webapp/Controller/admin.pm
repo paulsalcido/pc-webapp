@@ -85,7 +85,7 @@ sub roles :Local {
     my ( $self, $c ) = @_;
     if ( $c->request->method eq 'POST' ) {
         my $role = $c->request->params->{'role-name'};
-        my $default = $c->request->params->{'role-default'};
+        my $default = $c->request->params->{'role-default'} ? 'true' : 'false' ;
         if ( $role ) {
             my $hasrole = $c->model('WebAppDB::Role')->find({ name => $role });
             unless ( $hasrole ) {
@@ -96,6 +96,26 @@ sub roles :Local {
         }
     }
     $c->stash->{roles} = [ $c->model('WebAppDB::Role')->all() ];
+}
+
+=head2 role
+
+Allows you to update a role - name change/default settings.
+
+=cut
+
+sub role :Local :Args(1) {
+    my ( $self, $c ) = @_;
+    my $role = $c->model('WebAppDB::Role')->find({ id => $c->request->arguments->[0] });
+    if ( $c->request->method eq "POST" ) {
+        my $rolename = $c->request->params->{'role-name'};
+        my $default_role = $c->request->params->{'default-role'} ? 'true' : 'false' ;
+        $role->update({
+            name => $rolename,
+            default_role => $default_role,
+        });
+    }
+    $c->stash->{role} = $role;
 }
 
 =head2 member
