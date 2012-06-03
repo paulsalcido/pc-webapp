@@ -24,6 +24,18 @@ TODO: Build profile information output.
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
+
+    my $member = undef;
+    if ( $c->session->{member} && $c->session->{member}->{id} ) {
+        $member = $c->model('WebAppDB::Member')->find({ id => $c->session->{member}->{id} });
+    }
+    $c->stash->{member} = $member;
+}
+
+sub view :Local :Args(1) {
+    my ( $self, $c ) = @_;
+
+    $c->stash->{member} = $c->model('WebAppDB::Member')->find({ id => $c->request->arguments->[0] });
 }
 
 sub end :Private {

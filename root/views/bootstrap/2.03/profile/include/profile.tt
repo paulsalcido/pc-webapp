@@ -1,0 +1,11 @@
+<h1>[% member.display_name %]</h1>
+[% IF c.session.member.roles.admin %]
+    <div class="btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">User Administration
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="/admin/member/[% member.id %]">Member Roles</a>
+        </ul>
+    </div>
+[% END %]
