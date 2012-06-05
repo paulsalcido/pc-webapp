@@ -4,29 +4,13 @@ use namespace::autoclean;
 
 extends 'Catalyst::Model';
 
-has 'connect' => ( is => 'ro' );
-has 'channel' => ( is => 'ro' );
-has 'exchange_declare' => ( is => 'ro' );
-has 'pageview_exchange' => ( is => 'ro' );
-
 =head1 NAME
 
 webapp::Model::RabbitMQ - Catalyst Model
 
 =head1 DESCRIPTION
 
-Catalyst Model.
-
-=head1 AUTHOR
-
-Paul Salcido,paulsalcido.79@gmail.com
-
-=head1 LICENSE
-
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
-
-=cut
+Catalyst Model for handling requests to RabbitMQ and maintaining a good connection for realtime analytics.
 
 =head2 rmq
 
@@ -67,6 +51,11 @@ Expected configuration:
 There is an example configuration commented out in the webapp.conf file.
 
 =cut
+
+has 'connect' => ( is => 'ro' );
+has 'channel' => ( is => 'ro' );
+has 'exchange_declare' => ( is => 'ro' );
+has 'pageview_exchange' => ( is => 'ro' );
 
 has '_rmq' => ( is => 'ro' , lazy => 1 , builder => '_build_rmq' );
 
@@ -113,17 +102,45 @@ sub _build_rmq {
     return $rmq;
 }
 
+=head1 SUBROUTINES
+
+=cut
+
+=head2 publish_pageview({ routing_key => ... , c => $c })
+
+Requires that you send the catalyst $c object, so that it can derive information from it.
+
+This will publish a page view to the pageview_exchange.  For more information about routing keys, read the documentation on rabbbitmq.
+
+=cut
+
 sub publish_pageview {
     my $self = shift;
     my $p = shift;
-    if ( $self->_rmq ) {
+    my $c = $p->{c};
+    if ( $c && $self->_rmq ) {
+        my $message = { 
+            'member' => $c->session->{member} ? $c->session->{member}->{id} : undef,
+            'page' => $c->request->path,
+        };
         $self->_rmq->publish($self->channel,
             $p->{routing_key},
-            $p->{message},
+            JSON::encode_json($message),
             { exchange => $self->pageview_exchange }
         );
     }
 }
+
+=head1 AUTHOR
+
+Paul Salcido,paulsalcido.79@gmail.com
+
+=head1 LICENSE
+
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut
 
 __PACKAGE__->meta->make_immutable;
 

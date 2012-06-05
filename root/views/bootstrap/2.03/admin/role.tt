@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row-fluid">
-        [% PROCESS admin/include/navbar.tt %] 
+        [% PROCESS admin/include/navbar.tt active_tab='roles' %] 
         <div class="span9">
             <h1>Role: [% role.name %]</h1>
             <form class="well" method=post>

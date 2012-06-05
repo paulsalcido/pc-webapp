@@ -40,6 +40,12 @@ sub view :Local :Args(1) {
 
 sub end :Private {
     my ($self , $c ) = @_;
+
+    $c->model('RabbitMQ')->publish_pageview({ 
+        routing_key => "webapp.pageview",
+        c => $c,
+    });
+
     $c->forward($c->view('main'));
 }
 
