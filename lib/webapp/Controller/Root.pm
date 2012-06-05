@@ -2,6 +2,8 @@ package webapp::Controller::Root;
 use Moose;
 use namespace::autoclean;
 
+use JSON;
+
 BEGIN { extends 'Catalyst::Controller' }
 
 #
@@ -29,6 +31,7 @@ The root page (/)
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
+
 }
 
 =head2 logout
@@ -83,6 +86,17 @@ Forwards to the main view (Template Toolkit/Twitter Bootstrap).
 
 sub end :Private {
     my ( $self , $c ) = @_;
+
+    if ( $c->model('RabbitMQ') ) {
+        my $message = { "url" => $c->request->path };
+        if ( $c->session->{member} ) {
+            $message->{member_id} = $c->session->{member}->{id};
+        }
+        $c->model('RabbitMQ')->publish_pageview({ 
+            routing_key => "webapp.pageview",
+            message => JSON::encode_json($message)
+        });
+    }
 
     $c->forward( $c->view('main') );
 }
