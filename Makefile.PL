@@ -17,6 +17,16 @@ requires 'Moose';
 requires 'namespace::autoclean';
 requires 'Config::General'; # This should reflect the config file format you've chosen
                  # See Catalyst::Plugin::ConfigLoader for supported formats
+
+requires "Catalyst::View::TT";
+requires "Catalyst::Model::DBIC::Schema";
+requires "DBD::Pg";
+requires "DateTime::Format::Pg";
+requires "UUID";
+requires "Net::OpenID::Consumer";
+requires "Catalyst::Plugin::Session::Store::Memcached";
+requires "Facebook::Graph";
+
 test_requires 'Test::More' => '0.88';
 catalyst;
 
