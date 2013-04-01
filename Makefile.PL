@@ -22,7 +22,7 @@ requires "Catalyst::View::TT";
 requires "Catalyst::Model::DBIC::Schema";
 requires "DBD::Pg";
 requires "DateTime::Format::Pg";
-requires "UUID";
+requires "UUID::Tiny";
 requires "Net::OpenID::Consumer";
 requires "Catalyst::Plugin::Session::Store::Memcached";
 requires "Facebook::Graph";

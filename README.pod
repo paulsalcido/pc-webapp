@@ -22,7 +22,23 @@ This is the README pod for the application code base 'webapp'.  This is a Cataly
 
 =item apt-get install libpq-dev
 
+=item apt-get install libgmp-dev
+
+=item apt-get install libexpat1-dev
+
 =back
+
+At the time of this writing, DateTime::Format::Strptime was not installing properly.  I had to force its installation with:
+
+=over 4
+
+=item cpan -f DateTime::Format::Strptime
+
+=item cpan -f DateTime::Format::Builder
+
+=back
+
+That was a little annoying, given that builder failed on strptime tests, essentially.
 
 =head1 SETUP
 
