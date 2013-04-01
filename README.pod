@@ -8,29 +8,15 @@ This is the README pod for the application code base 'webapp'.  This is a Cataly
 
 =head1 SETUP
 
-The following should be added to the Makefile.
+Getting this started is a little bit more painful than I currently want it to be.  I need to test the following on a clean box:
 
-On ubuntu, this requires that a few libraries be installed and setup before you can use this.  On my last test run from a completed box, I had to do the following:
+perl Makefile.PL
 
-=head2 apt-get installations
+make
+make installdeps
+make install
 
-=over 4
-
-=item libcatalyst-perl
-
-=item libcatalyst-devel-perl
-
-=item libcatalyst-view-tt-perl
-
-=item libuuid-perl
-
-=item libnet-openid-consumer-perl
-
-=item memcached
-
-=item postgresql
-
-=back
+** Run!
 
 I coded this with postgresql in mind.  The problem is the default values for timestamps currently in the Model ResultSet classes.  it is set to \"now()" which will break in many databases, I think.
 
