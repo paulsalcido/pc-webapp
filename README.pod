@@ -6,6 +6,22 @@ webapp/README
 
 This is the README pod for the application code base 'webapp'.  This is a Catalyst application that already has a few nice things built into the Model (a base database), the Controllers (some init/admin page possibilities) and login utilities, as well as a Template Toolkit front end based off of Twitter Bootstrap.
 
+=head1 SERVER SETUP
+
+12.04, Ubuntu:
+
+=over 4
+
+=item apt-get install postgresql
+
+=item apt-get install memcached
+
+=item apt-get install rabbitmq-server (optional)
+
+=item apt-get install build-essentials
+
+=back
+
 =head1 SETUP
 
 Getting this started is a little bit more painful than I currently want it to be.  I need to test the following on a clean box:
