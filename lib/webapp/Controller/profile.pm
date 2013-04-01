@@ -32,11 +32,23 @@ sub index :Path :Args(0) {
     $c->stash->{member} = $member;
 }
 
+=head1 view
+
+View a member profile.
+
+=cut
+
 sub view :Local :Args(1) {
     my ( $self, $c ) = @_;
 
     $c->stash->{member} = $c->model('WebAppDB::Member')->find({ id => $c->request->arguments->[0] });
 }
+
+=head1 end
+
+Forwards to the main view, publishes a page view to RabbitMQ.
+
+=cut
 
 sub end :Private {
     my ($self , $c ) = @_;

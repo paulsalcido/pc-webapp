@@ -62,6 +62,8 @@ This does the official 'check' for facebook information on response, and creates
 
 =cut
 
+# TODO: This needs a Refactor, badly.
+
 sub check :Local {
     my ( $self, $c ) = @_;
     my $fb = $c->model('WebAppDB::FacebookCredentials')->find({
