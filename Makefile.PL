@@ -27,6 +27,7 @@ requires "UUID::Tiny";
 requires "Net::OpenID::Consumer";
 requires "Catalyst::Plugin::Session::Store::Memcached";
 requires "Catalyst::Plugin::Session::State::Cookie";
+requires "Net::RabbitMQ"; # This is actually optional.
 
 test_requires 'Test::More' => '0.88';
 catalyst;
