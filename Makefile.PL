@@ -25,7 +25,6 @@ requires "DateTime::Format::Pg";
 requires "UUID::Tiny";
 requires "Net::OpenID::Consumer";
 requires "Catalyst::Plugin::Session::Store::Memcached";
-requires "Facebook::Graph";
 
 test_requires 'Test::More' => '0.88';
 catalyst;
