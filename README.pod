@@ -20,6 +20,8 @@ This is the README pod for the application code base 'webapp'.  This is a Cataly
 
 =item apt-get install build-essentials
 
+=item apt-get install libpq-dev
+
 =back
 
 =head1 SETUP
