@@ -14,6 +14,7 @@ requires 'Catalyst::Plugin::ConfigLoader';
 requires 'Catalyst::Plugin::Static::Simple';
 requires 'Catalyst::Action::RenderView';
 requires 'Moose';
+requires 'MooseX::NonMoose';
 requires 'namespace::autoclean';
 requires 'Config::General'; # This should reflect the config file format you've chosen
                  # See Catalyst::Plugin::ConfigLoader for supported formats
@@ -25,6 +26,7 @@ requires "DateTime::Format::Pg";
 requires "UUID::Tiny";
 requires "Net::OpenID::Consumer";
 requires "Catalyst::Plugin::Session::Store::Memcached";
+requires "Catalyst::Plugin::Session::State::Cookie";
 
 test_requires 'Test::More' => '0.88';
 catalyst;
