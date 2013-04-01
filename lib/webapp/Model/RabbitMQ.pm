@@ -52,6 +52,8 @@ There is an example configuration commented out in the webapp.conf file.
 
 =cut
 
+# TODO: This is a fucking mess.  Clean this shit up.
+
 has 'connect' => ( is => 'ro' );
 has 'channel' => ( is => 'ro' );
 has 'exchange_declare' => ( is => 'ro' );

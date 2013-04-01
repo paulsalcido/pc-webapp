@@ -33,6 +33,8 @@ Allows you to setup various login types (Currently Facebook Credentials and Open
 
 =cut
 
+# TODO: This is a fucking mess. Refactor.
+
 sub loginsetup :Local {
     my ( $self, $c ) = @_;
     my $webapp = $c->config->{name};

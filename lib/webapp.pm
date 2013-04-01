@@ -3,7 +3,7 @@ use Moose;
 use namespace::autoclean;
 
 use Catalyst::Runtime 5.80;
-use UUID;
+use UUID::Tiny;
 
 # Set flags and add plugins for the application.
 #
@@ -71,10 +71,7 @@ This subroutine is used to produce new uuids for the application database entrie
 =cut
 
 sub uuid {
-    my ($str,$uuid) = ();
-    UUID::generate($str);
-    UUID::unparse($str,$uuid);
-    return $uuid;
+    return create_UUID(UUID_V4);
 }
 
 =head2 refresh_member_session

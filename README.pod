@@ -6,31 +6,51 @@ webapp/README
 
 This is the README pod for the application code base 'webapp'.  This is a Catalyst application that already has a few nice things built into the Model (a base database), the Controllers (some init/admin page possibilities) and login utilities, as well as a Template Toolkit front end based off of Twitter Bootstrap.
 
-=head1 SETUP
+=head1 SERVER SETUP
 
-The following should be added to the Makefile.
-
-On ubuntu, this requires that a few libraries be installed and setup before you can use this.  On my last test run from a completed box, I had to do the following:
-
-=head2 apt-get installations
+12.04, Ubuntu:
 
 =over 4
 
-=item libcatalyst-perl
+=item apt-get install postgresql
 
-=item libcatalyst-devel-perl
+=item apt-get install memcached
 
-=item libcatalyst-view-tt-perl
+=item apt-get install rabbitmq-server (optional)
 
-=item libuuid-perl
+=item apt-get install build-essentials
 
-=item libnet-openid-consumer-perl
+=item apt-get install libpq-dev
 
-=item memcached
+=item apt-get install libgmp-dev
 
-=item postgresql
+=item apt-get install libexpat1-dev
 
 =back
+
+At the time of this writing, DateTime::Format::Strptime was not installing properly.  I had to force its installation with:
+
+=over 4
+
+=item cpan -f DateTime::Format::Strptime
+
+=item cpan -f DateTime::Format::Builder
+
+=back
+
+That was a little annoying, given that builder failed on strptime tests, essentially.
+
+=head1 SETUP
+
+Getting this started is a little bit more painful than I currently want it to be.  I need to test the following on a clean box:
+
+perl Makefile.PL
+
+make
+make installdeps
+make install
+
+** Run!
 
 I coded this with postgresql in mind.  The problem is the default values for timestamps currently in the Model ResultSet classes.  it is set to \"now()" which will break in many databases, I think.
 

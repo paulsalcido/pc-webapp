@@ -70,6 +70,8 @@ This finalizes the google user and adds them to the database, or logs in an exis
 
 =cut
 
+# TODO: Subroutines of this length are not acceptable, time to start a refactor.
+
 sub check :Local :Args(0) {
     my ( $self, $c ) = @_;
 
